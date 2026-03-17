@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO / EEAT Meta Tags -->
+  <title>ADA Staking — How to Stake Cardano, Rewards, APY/APR, Pool Selection &amp; Troubleshooting (2026)</title>
+  <meta name="description" content="ADA staking guide (2026): how Cardano delegation works, epoch mechanics, k-parameter, pool selection criteria, rewards and real yield, APY vs APR, liquid staking options, minimum amounts, calculator framework, risks, safety checks, comparisons, and troubleshooting. Includes KPIs, runbook, and a deep FAQ.">
+  <meta name="author" content="Crypto Finance Experts">
+  <link rel="canonical" href="https://lido-ada-staking.example.com/">
+
+  <link rel="icon" type="image/png" href="lido.staking.logo.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://lido-ada-staking.example.com/">
+  <meta property="og:title" content="ADA Staking — How to Stake Cardano, Rewards, APY/APR, Pool Selection &amp; Troubleshooting (2026)">
+  <meta property="og:description" content="Practical ADA staking guide: Cardano delegation mechanics, epoch rewards, pool selection, APY/APR, liquid staking, safety checklist, and troubleshooting.">
+  <meta property="og:image" content="cover.png">
+
+  <!-- Twitter Card -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://lido-ada-staking.example.com/">
+  <meta property="twitter:title" content="ADA Staking — Cardano Delegation, Rewards, Pool Selection &amp; Troubleshooting (2026)">
+  <meta property="twitter:description" content="How to stake ADA on Cardano: delegation mechanics, epoch rewards, pool selection, APY/APR, and best practices in 2025–2026.">
+  <meta property="twitter:image" content="cover.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "ADA Staking — How to Stake Cardano, Rewards, APY/APR, Pool Selection & Troubleshooting (2026)",
+    "description": "Comprehensive guide to ADA staking on Cardano: delegation mechanics, epoch rewards, k-parameter, pool selection, APY vs APR, liquid staking, and troubleshooting.",
+    "author": { "@type": "Organization", "name": "Crypto Finance Experts" },
+    "publisher": { "@type": "Organization", "name": "Crypto Finance Experts" },
+    "datePublished": "2026-01-01",
+    "dateModified": "2026-03-01"
+  }
+  </script>
+
+  <style>
+    :root{
+      /* Deep Navy–Cardano Theme */
+      --primary:#1D4ED8;
+      --primary-600:#1E40AF;
+      --primary-700:#1E3A8A;
+      --accent:#60A5FA;
+
+      --ink:#EFF6FF;
+      --muted:#94A3B8;
+      --muted-2:#64748B;
+
+      --bg:#020714;
+      --panel:#04091E;
+      --panel-2:#060D28;
+      --line:rgba(255,255,255,.08);
+
+      --ok:#34D399;
+      --warn:#F59E0B;
+      --error:#F87171;
+
+      --shadow:0 12px 32px rgba(0,0,0,.55);
+      --radius:14px;
+      --radius-sm:10px;
+      --radius-lg:20px;
+      --gap:1.25rem;
+      --gap-lg:2rem;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+      color:var(--muted);
+      background:var(--bg);
+      line-height:1.65;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{max-width:100%;height:auto;display:block}
+    .container{max-width:1100px;margin:0 auto;padding:0 1.25rem}
+
+    h1,h2,h3,h4{color:var(--ink);line-height:1.25;margin:0 0 .6rem}
+    h1{font-size:clamp(2rem,4.5vw,3.1rem);font-weight:800;letter-spacing:-.2px}
+    h2{font-size:clamp(1.35rem,2.8vw,2rem);margin-top:2.2rem;padding-top:.6rem;border-top:1px solid var(--line)}
+    h3{font-size:clamp(1.05rem,2.2vw,1.3rem);color:#BFDBFE}
+
+    p,li,td,th{font-size:1rem}
+    .lead{font-size:1.125rem;color:#DBEAFE}
+    .muted{color:var(--muted)}
+    .muted-2{color:var(--muted-2)}
+
+    header.hero{padding:clamp(2rem,6vw,4rem) 0;border-bottom:1px solid var(--line)}
+    .hero-grid{display:grid;gap:var(--gap-lg);grid-template-columns:1fr;align-items:stretch}
+    .hero-card{
+      background:var(--panel);border:1px solid var(--line);
+      border-radius:var(--radius-lg);padding:clamp(1rem,3vw,1.75rem);box-shadow:var(--shadow);
+    }
+
+    .brand-row{display:flex;align-items:center;gap:.9rem;margin-bottom:.75rem}
+    .brand-logo{
+      width:54px;height:54px;border-radius:14px;border:1px solid var(--line);
+      background:rgba(29,78,216,.08);padding:.35rem;object-fit:contain;
+      box-shadow:0 6px 16px rgba(0,0,0,.30);flex:0 0 auto;
+    }
+
+    .cta{
+      display:inline-flex;align-items:center;gap:.5rem;
+      background:var(--primary);color:#fff;padding:1rem 2.5rem;border-radius:12px;
+      font-weight:800;font-size:1.05rem;letter-spacing:.2px;
+      box-shadow:0 10px 28px rgba(29,78,216,.32);border:1px solid rgba(255,255,255,.10);
+      transition:background .18s,transform .18s,box-shadow .18s;
+    }
+    .cta:hover{background:var(--primary-600);transform:translateY(-2px);box-shadow:0 16px 36px rgba(29,78,216,.44);text-decoration:none}
+
+    .note{
+      border-left:2px solid var(--accent);padding:.75rem 1rem;
+      background:rgba(29,78,216,.08);border-radius:0 10px 10px 0;color:#DBEAFE;
+    }
+
+    section.step-guide{padding:clamp(2rem,6vw,3.5rem) 0}
+    .steps{display:grid;gap:var(--gap);grid-template-columns:1fr}
+    .step{
+      background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+      padding:1.2rem;box-shadow:0 8px 20px rgba(0,0,0,.35);
+      transition:transform .2s ease,border-color .2s ease;
+    }
+    .step:hover{transform:translateY(-3px);border-color:rgba(96,165,250,.28)}
+    .step .icon{
+      width:48px;height:48px;border-radius:10px;display:inline-grid;place-items:center;
+      background:rgba(29,78,216,.14);margin-bottom:.6rem;color:#BFDBFE;
+      font-weight:900;border:1px solid rgba(96,165,250,.20);
+    }
+
+    main .card{
+      background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+      padding:1.25rem;margin:1.25rem 0;box-shadow:0 8px 20px rgba(0,0,0,.35);
+    }
+
+    .grid-2{display:grid;gap:var(--gap);grid-template-columns:1fr}
+    .pillbar{display:flex;flex-wrap:wrap;gap:.6rem;margin:.75rem 0 0}
+    .pill{border:1px solid var(--line);background:rgba(29,78,216,.08);padding:.4rem .65rem;border-radius:999px;font-weight:700;color:#BFDBFE}
+
+    .toc{border:1px solid var(--line);background:rgba(29,78,216,.04);border-radius:var(--radius);padding:1rem}
+    .toc strong{color:var(--ink)}
+    .toc ul{margin:.5rem 0 0;padding-left:1.1rem}
+    .toc li{margin:.25rem 0}
+    .toc a{font-weight:700;color:var(--accent)}
+
+    table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:12px}
+    th,td{padding:.9rem;border-bottom:1px solid var(--line)}
+    th{background:rgba(29,78,216,.10);color:var(--ink);text-align:left}
+    tr.highlight{background:rgba(29,78,216,.06)}
+    tr:hover{background:rgba(255,255,255,.02)}
+
+    .ok{color:var(--ok)}.warn{color:var(--warn)}.err{color:var(--error)}
+
+    .eeat{
+      background:rgba(29,78,216,.04);border:1px solid var(--line);
+      border-radius:var(--radius);padding:1.25rem;box-shadow:0 8px 20px rgba(0,0,0,.35);
+    }
+
+    .faq-item{border-bottom:1px solid var(--line);padding:.9rem 0}
+    .faq-button{all:unset;display:flex;justify-content:space-between;align-items:center;width:100%;cursor:pointer;padding:.3rem 0}
+    .faq-button:focus-visible{outline:2px solid var(--accent)}
+    .faq-button h3{margin:0;font-weight:800}
+    .faq-content{max-height:0;overflow:hidden;transition:max-height .25s ease}
+    .faq-content.open{padding-top:.6rem}
+    .faq-plus{font-weight:900;color:var(--accent);font-size:1.2rem}
+
+    .cta-center{display:flex;justify-content:center;margin-top:1.25rem}
+
+    .badge-row{display:flex;flex-wrap:wrap;gap:.6rem;margin:.9rem 0 0}
+    .badge{border:1px solid rgba(96,165,250,.20);background:rgba(96,165,250,.06);padding:.35rem .6rem;border-radius:999px;font-weight:800;color:#BFDBFE}
+
+    .callout-grid{display:grid;gap:var(--gap);grid-template-columns:1fr;margin-top:.75rem}
+    .mini{background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:var(--radius);padding:1rem}
+    .mini h3{margin-bottom:.35rem}
+    .kpi-badges{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:.5rem}
+    .kpi-badges span{
+      border:1px solid rgba(29,78,216,.24);background:rgba(29,78,216,.10);
+      color:#BFDBFE;padding:.3rem .55rem;border-radius:999px;font-weight:800;font-size:.9rem;
+    }
+
+    .src{
+      display:inline-flex;align-items:center;gap:.2rem;font-size:.78rem;font-weight:700;
+      color:var(--accent);border:1px solid rgba(96,165,250,.24);background:rgba(29,78,216,.08);
+      border-radius:5px;padding:.1rem .4rem;vertical-align:middle;white-space:nowrap;
+    }
+    .src:hover{background:rgba(96,165,250,.16);text-decoration:none}
+    .src::before{content:'↗ ';font-size:.7rem;opacity:.7}
+
+    /* epoch timeline */
+    .epoch-flow{
+      display:flex;align-items:center;flex-wrap:wrap;gap:.5rem;margin:1rem 0;
+    }
+    .epoch-box{
+      background:rgba(29,78,216,.12);border:1px solid rgba(96,165,250,.20);
+      border-radius:10px;padding:.55rem .9rem;font-size:.85rem;font-weight:700;
+      color:#BFDBFE;text-align:center;min-width:90px;
+    }
+    .epoch-box.active{
+      background:rgba(29,78,216,.24);border-color:rgba(96,165,250,.40);color:#DBEAFE;
+    }
+    .epoch-arrow{color:var(--accent);font-size:1rem;font-weight:900}
+
+    /* k-parameter visual */
+    .k-bar{
+      display:flex;align-items:center;gap:.75rem;margin:.5rem 0;
+    }
+    .k-label{min-width:110px;font-size:.85rem;font-weight:700;color:#BFDBFE}
+    .k-track{flex:1;height:5px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden}
+    .k-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--primary),var(--accent))}
+    .k-val{min-width:52px;text-align:right;font-size:.85rem;font-weight:800;color:var(--accent)}
+
+    @media(min-width:860px){
+      .steps{grid-template-columns:repeat(4,1fr)}
+      .grid-2{grid-template-columns:1fr 1fr}
+      .callout-grid{grid-template-columns:1fr 1fr}
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="hero" role="banner">
+  <div class="container hero-grid">
+    <div class="hero-card" aria-label="Intro">
+      <div class="brand-row">
+        <img class="brand-logo" src="lido.staking.logo.png" alt="Lido Staking logo">
+        <div>
+          <div class="muted" style="font-weight:800;letter-spacing:.2px;">Operational Guide</div>
+          <div class="muted-2" style="font-size:.95rem;">Cardano Delegation&nbsp;•&nbsp;Epoch Rewards&nbsp;•&nbsp;Pool Selection&nbsp;•&nbsp;APY/APR&nbsp;•&nbsp;Liquid Staking</div>
+        </div>
+      </div>
+
+      <h1>ADA Staking</h1>
+      <p class="lead">
+        A practical, security-first guide to staking ADA on Cardano: how delegation and epoch mechanics
+        work end-to-end, how pool selection drives your rewards, how to compare
+        <strong>APY vs APR</strong> across pools and liquid staking options, and how to avoid
+        the common mistakes that reduce yield or create unnecessary risk.
+      </p>
+
+      <div class="cta-center">
+        <a href="https://lido-staking.net/" class="cta" target="_blank" rel="noopener" aria-label="Explore staking options with Lido">
+          Explore Staking Options &nbsp;→
+        </a>
+      </div>
+
+      <div class="note" style="margin-top:1.25rem;">
+        <strong>Core advantage:</strong> Cardano staking is among the most accessible of any proof-of-stake
+        network — ADA never leaves your wallet, there is no unbonding period, no minimum delegation amount,
+        and rewards compound automatically every epoch. The primary decision is pool selection, not
+        technical configuration.
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="step-guide" aria-labelledby="how-works">
+  <div class="container">
+    <h2 id="how-works">How Cardano Delegation Works: End-to-End Workflow (Choose → Delegate → Wait → Compound)</h2>
+    <div class="steps" role="list">
+      <article class="step" role="listitem">
+        <div class="icon">①</div>
+        <h3>Choose a stake pool</h3>
+        <p>
+          Research stake pools using explorers like ADApools.org or PoolTool.
+          Evaluate pool fee (margin + fixed cost), pledge amount, performance history,
+          and pool saturation level. Avoid over-saturated pools (above 100% saturation).
+        </p>
+      </article>
+      <article class="step" role="listitem">
+        <div class="icon">②</div>
+        <h3>Delegate from your wallet</h3>
+        <p>
+          Open Daedalus, Eternl, Lace, or Yoroi wallet. Select "Delegation" or "Stake Pool"
+          and search for your chosen pool. Delegation costs a one-time 2 ADA deposit (refundable)
+          plus a small transaction fee. Your ADA never leaves your wallet.
+        </p>
+      </article>
+      <article class="step" role="listitem">
+        <div class="icon">③</div>
+        <h3>Wait for epoch activation</h3>
+        <p>
+          Cardano operates in 5-day epochs. Delegation activates at the end of the current epoch
+          and you first become eligible to earn rewards at the start of the following epoch.
+          Your first reward payment arrives approximately 15–20 days after initial delegation.
+        </p>
+      </article>
+      <article class="step" role="listitem">
+        <div class="icon">④</div>
+        <h3>Rewards compound automatically</h3>
+        <p>
+          After the initial wait, rewards are added to your delegated stake automatically
+          every epoch — increasing your base for future reward calculations.
+          No manual claiming or gas costs for compounding. You can spend, send, or
+          redelegate at any time without penalty.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<main class="container" role="main">
+
+  <section class="card toc" aria-label="Table of Contents">
+    <strong>On this page (ADA Staking):</strong>
+    <ul>
+      <li><a href="#overview">Overview — Cardano's unique staking model</a></li>
+      <li><a href="#rewards">Rewards: what drives yield in Cardano</a></li>
+      <li><a href="#apy-apr">APY / APR: how to compare correctly</a></li>
+      <li><a href="#how-to">How to delegate: step-by-step tutorial</a></li>
+      <li><a href="#calculator">Calculator: net yield estimation framework</a></li>
+      <li><a href="#epoch-mechanics">Epoch mechanics: timing and reward flow</a></li>
+      <li><a href="#pool-selection">Pool selection: what actually matters</a></li>
+      <li><a href="#minimum">Minimum amount and costs</a></li>
+      <li><a href="#liquid">Liquid staking options for ADA</a></li>
+      <li><a href="#review">Review: legit, trust signals, and what to watch</a></li>
+      <li><a href="#safety">Risks and rewards: what actually matters</a></li>
+      <li><a href="#comparison">Comparison: native delegation vs liquid staking</a></li>
+      <li><a href="#best-practices">Best practices: high-impact, simple rules</a></li>
+      <li><a href="#troubleshooting">Troubleshooting and common issues</a></li>
+      <li><a href="#eeat">Sources and references</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+  </section>
+
+  <section class="card" id="overview">
+    <h2>Overview: Cardano's Unique Staking Model</h2>
+    <p>
+      Cardano uses an Ouroboros proof-of-stake protocol with a delegation model that is
+      meaningfully different from most other networks. Key properties that set it apart:
+      no unbonding period, no minimum delegation amount, ADA stays in your wallet at all times,
+      automatic reward compounding every epoch, and a liquid staking design that predates
+      the liquid staking trend on other networks.
+    </p>
+
+    <div class="pillbar" aria-label="Key topics">
+      <span class="pill">No Lock-Up</span>
+      <span class="pill">Epoch Mechanics</span>
+      <span class="pill">Pool Selection</span>
+      <span class="pill">Auto-Compounding</span>
+      <span class="pill">k-Parameter</span>
+      <span class="pill">Saturation</span>
+    </div>
+
+    <div class="callout-grid" role="list">
+      <div class="mini" role="listitem">
+        <h3>Key advantages of Cardano staking</h3>
+        <p class="muted">
+          No lock-up period — you can spend, receive, or move ADA at any time without penalty.
+          ADA is never transferred to a pool; it remains in your wallet throughout. No minimum amount.
+          Rewards compound automatically every epoch with no gas cost or manual action required.
+        </p>
+        <div class="kpi-badges">
+          <span>No lock-up</span><span>ADA in your wallet</span><span>Auto-compound</span>
+        </div>
+      </div>
+      <div class="mini" role="listitem">
+        <h3>Main constraints</h3>
+        <p class="muted">
+          A 2 ADA deposit is required for delegation registration (refundable when you undelegate).
+          First rewards arrive after approximately 15–20 days due to epoch timing.
+          Pool selection is the primary driver of yield variance — a poor pool choice
+          can meaningfully reduce realized APY.
+        </p>
+        <div class="kpi-badges">
+          <span>2 ADA deposit</span><span>15–20 day delay</span><span>Pool selection matters</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:1rem;">
+      <strong>Operational truth:</strong> Cardano's staking model is designed to be maximally accessible.
+      The technical barrier is very low — the main decision that affects your yield is pool selection,
+      not technical configuration. Spend your research time on evaluating pools, not on wallet setup.
+    </div>
+  </section>
+
+  <section class="card" id="rewards">
+    <h2>Rewards: What Drives Yield on Cardano</h2>
+    <p>
+      Cardano staking rewards come from two sources: a fixed reserve fund (gradually released
+      over time) and transaction fees from each epoch. Understanding both sources helps
+      explain why rewards are predictable and how they evolve over Cardano's lifetime.
+      Current reward rates are published at
+      <a href="https://adapools.org/" target="_blank" rel="noopener nofollow" class="src">ADApools.org</a>
+      and
+      <a href="https://pooltool.io/" target="_blank" rel="noopener nofollow" class="src">PoolTool.io</a>.
+    </p>
+    <ul>
+      <li><strong>Reserve fund distribution:</strong> Cardano has a fixed total supply of 45 billion ADA. A portion is held in a reserve that is gradually distributed as staking rewards each epoch (currently approximately 0.3% of the remaining reserve per epoch). This reserve-driven component decreases gradually over time as the reserve depletes.</li>
+      <li><strong>Transaction fees:</strong> all transaction fees collected on Cardano in each epoch flow into the reward pot and are distributed proportionally to delegators.</li>
+      <li><strong>Pool performance:</strong> a pool that misses blocks reduces the rewards distributed to its delegators for that epoch. Pool uptime is the most operationally important factor after fee structure.</li>
+      <li><strong>Pool margin (fee):</strong> pool operators charge a margin (percentage of epoch rewards) plus a fixed minimum fee. Both directly reduce delegator yield.</li>
+      <li><strong>Saturation level:</strong> the k-parameter defines the "optimal" pool size. Pools above their saturation point pay reduced rewards to delegators — a deliberate design to encourage decentralisation.</li>
+    </ul>
+
+    <div class="note">
+      <strong>Rule:</strong> Net yield = (reserve distribution + fee pot share) × pool performance − pool margin − fixed pool fee.
+      Saturation above 100% reduces rewards further. Always evaluate all four factors together.
+    </div>
+  </section>
+
+  <section class="card" id="apy-apr">
+    <h2>APY / APR: How to Compare Pools Without Getting Misled</h2>
+    <p>
+      Cardano's automatic reward compounding makes the APY vs APR distinction smaller than on networks
+      requiring manual claims — but it is still important to understand what each pool is actually
+      displaying, since some quote gross APY and others net APY after fees.
+    </p>
+
+    <table aria-label="APY vs APR for ADA staking">
+      <thead>
+        <tr><th>Term</th><th>Cardano context</th><th>What to watch</th></tr>
+      </thead>
+      <tbody>
+        <tr class="highlight">
+          <td>Gross APY</td>
+          <td>Network reward rate before pool fees</td>
+          <td>Some pool explorers display gross APY — always check if pool fees are included</td>
+        </tr>
+        <tr>
+          <td>Net APY</td>
+          <td>APY after pool margin and fixed fee deducted</td>
+          <td>The only honest comparison metric — use this when comparing pools directly</td>
+        </tr>
+        <tr class="highlight">
+          <td>Epoch RoS (Return on Stake)</td>
+          <td>Return generated per epoch — the building block of APY</td>
+          <td>ADApools.org and PoolTool display this — more granular than annual figures for active monitoring</td>
+        </tr>
+        <tr>
+          <td>Lifetime RoS</td>
+          <td>Pool's average return over its entire operational history</td>
+          <td>More reliable than recent RoS for evaluating pool quality — check on ADApools.org</td>
+        </tr>
+        <tr class="highlight">
+          <td>Real yield</td>
+          <td>USD-adjusted return after ADA price movement</td>
+          <td>ADA price dominates USD returns — 4% APY on a token that moves 50% is noise compared to the price</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <strong>Quick check:</strong> Always use net APY after pool fees for comparisons.
+      A pool advertising 5% APY with a 5% margin is returning the same net yield as a pool
+      advertising 4.7% APY with a 0% margin — calculate the net figure, not the headline.
+    </div>
+  </section>
+
+  <section class="card" id="how-to">
+    <h2>How to Delegate ADA: Step-by-Step Tutorial</h2>
+    <ol>
+      <li><strong>Choose a Cardano wallet:</strong> use a non-custodial wallet with built-in staking support.
+        <a href="https://eternl.io/" target="_blank" rel="noopener nofollow" class="src">Eternl</a>
+        (browser/mobile),
+        <a href="https://www.lace.io/" target="_blank" rel="noopener nofollow" class="src">Lace</a>
+        (IOG's official wallet), or Daedalus (full node, desktop) are the recommended options.
+        Yoroi is also supported but less actively developed.</li>
+      <li><strong>Fund your wallet with ADA:</strong> transfer your ADA from an exchange to your self-custody wallet. Keep at least 5 ADA for transaction fees and the 2 ADA delegation deposit.</li>
+      <li><strong>Research stake pools:</strong> use
+        <a href="https://adapools.org/" target="_blank" rel="noopener nofollow" class="src">ADApools.org</a>
+        or
+        <a href="https://pooltool.io/" target="_blank" rel="noopener nofollow" class="src">PoolTool.io</a>
+        to evaluate pools on margin, fixed fee, pledge, saturation, and lifetime RoS.</li>
+      <li><strong>Delegate from your wallet:</strong> in your wallet's staking section, search by pool ticker or pool ID. Review the pool's fee structure before confirming. Delegation costs approximately 0.17 ADA in fees plus the 2 ADA refundable deposit.</li>
+      <li><strong>Wait for the first reward cycle:</strong> first rewards arrive after approximately 15–20 days (3 epochs). This is normal — it is not a sign that something went wrong.</li>
+      <li><strong>Monitor pool performance:</strong> check your pool's epoch-by-epoch block production at ADApools.org. If the pool consistently misses blocks or changes its fee structure, consider redelegating.</li>
+      <li><strong>Redelegate if needed:</strong> you can change pools at any time with no lock-up. Redelegation takes effect from the next epoch. The 2 ADA deposit carries over and does not need to be paid again.</li>
+    </ol>
+
+    <div class="note">
+      <strong>Key principle:</strong> Cardano staking is designed so that delegating is simple and
+      switching pools is frictionless. The primary ongoing task is periodic pool performance monitoring —
+      not technical maintenance. Review your pool once per month and redelegate promptly if performance degrades.
+    </div>
+  </section>
+
+  <section class="card" id="calculator">
+    <h2>Calculator: Net Yield Estimation for ADA Stakers</h2>
+    <p>
+      Cardano's auto-compounding design simplifies the yield calculation compared to networks
+      requiring manual claims. The key variables are pool fees and performance, not gas costs.
+    </p>
+
+    <table aria-label="ADA staking calculator inputs">
+      <thead>
+        <tr><th>Input</th><th>Meaning</th><th>Why it matters</th></tr>
+      </thead>
+      <tbody>
+        <tr class="highlight">
+          <td>ADA stake amount</td>
+          <td>Your delegated principal</td>
+          <td>Determines absolute rewards; larger stakes benefit more from very small fee differences</td>
+        </tr>
+        <tr>
+          <td>Network gross APY</td>
+          <td>Cardano's current network-wide reward rate</td>
+          <td>Currently approximately 3–5% gross APY — check current rate at ADApools.org</td>
+        </tr>
+        <tr class="highlight">
+          <td>Pool margin %</td>
+          <td>Pool's percentage fee on epoch rewards</td>
+          <td>Directly reduces net yield — a 5% margin on 4% gross APY reduces yield by 0.2%</td>
+        </tr>
+        <tr>
+          <td>Pool fixed cost (ADA/epoch)</td>
+          <td>Minimum fee taken before margin applies</td>
+          <td>Protocol minimum is 170 ADA/epoch — small delegations pay proportionally more fixed cost</td>
+        </tr>
+        <tr class="highlight">
+          <td>Pool performance %</td>
+          <td>% of expected blocks the pool has produced</td>
+          <td>Below 90% lifetime performance significantly reduces realized rewards — check on PoolTool</td>
+        </tr>
+        <tr>
+          <td>Pool saturation %</td>
+          <td>Pool stake as % of the optimal saturation point</td>
+          <td>Pools above 100% saturation pay reduced rewards to encourage delegation redistribution</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout-grid">
+      <div class="mini">
+        <h3>Example: 10,000 ADA, well-configured pool</h3>
+        <p class="muted">Gross APY 4.5%. Pool margin 1%, fixed cost 340 ADA/epoch (your share: ~0.1 ADA/epoch). Performance 99%. Net APY after all fees: ~4.4%. Annual rewards: ~440 ADA. Auto-compounds — no manual action required.</p>
+      </div>
+      <div class="mini">
+        <h3>Example: 1,000 ADA, same pool</h3>
+        <p class="muted">Same gross APY. Fixed cost share: ~0.01 ADA/epoch (negligible at this size). Net APY: still ~4.4%. Annual rewards: ~44 ADA. Cardano's design makes even small stakes economical — no gas drag on compounding at any balance size.</p>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Cardano advantage:</strong> Unlike Ethereum, Cosmos, or Polkadot where compounding
+      requires manual transactions with gas costs, Cardano rewards compound automatically every epoch.
+      This makes Cardano staking economical at any balance size — there is no practical minimum
+      below which gas erodes the yield.
+    </div>
+  </section>
+
+  <section class="card" id="epoch-mechanics">
+    <h2>Epoch Mechanics: Timing, Snapshots, and Reward Flow</h2>
+    <p>
+      Understanding Cardano's 5-day epoch cycle is essential for correctly interpreting
+      when rewards appear and why first-time delegators experience a delay.
+      The epoch structure is documented at
+      <a href="https://docs.cardano.org/about-cardano/evolution/cardano-epochs/" target="_blank" rel="noopener nofollow" class="src">docs.cardano.org — Epochs</a>.
+    </p>
+
+    <div class="epoch-flow" aria-label="Epoch reward flow">
+      <div class="epoch-box">Delegation<br>confirmed<br><small>Epoch N</small></div>
+      <span class="epoch-arrow">→</span>
+      <div class="epoch-box">Snapshot<br>taken<br><small>End of N</small></div>
+      <span class="epoch-arrow">→</span>
+      <div class="epoch-box active">Eligible<br>to earn<br><small>Epoch N+1</small></div>
+      <span class="epoch-arrow">→</span>
+      <div class="epoch-box">Rewards<br>calculated<br><small>Epoch N+2</small></div>
+      <span class="epoch-arrow">→</span>
+      <div class="epoch-box active">Rewards<br>arrive<br><small>Epoch N+3</small></div>
+    </div>
+
+    <ul>
+      <li><strong>Each epoch lasts 5 days.</strong> Cardano divides time into fixed 5-day windows called epochs.</li>
+      <li><strong>Stake snapshot at epoch boundary.</strong> At the end of each epoch, a snapshot is taken of all delegations. This snapshot determines eligibility for rewards in the following epoch.</li>
+      <li><strong>First rewards arrive at Epoch N+3.</strong> If you delegate during Epoch N, your delegation is snapshot at the end of N, you are eligible in N+1, rewards are calculated at the end of N+2, and you receive them during N+3 — approximately 15–20 days after initial delegation.</li>
+      <li><strong>Rewards compound into stake automatically.</strong> Once the initial cycle begins, rewards paid each epoch are automatically added to your delegated stake and included in the next snapshot — continuous auto-compounding with no action required.</li>
+    </ul>
+
+    <div class="callout-grid">
+      <div class="mini">
+        <h3>Changing pools mid-epoch</h3>
+        <p class="muted">If you redelegate to a new pool during Epoch N, the snapshot at the end of N captures your new delegation. Your rewards from Epoch N still come from your previous pool (based on the N−1 snapshot). You switch fully from Epoch N+1 onwards — no gap in reward eligibility.</p>
+      </div>
+      <div class="mini">
+        <h3>Spending ADA while delegating</h3>
+        <p class="muted">If you spend some ADA from your delegating wallet during Epoch N, the snapshot at the end of N captures the lower balance. Your rewards for Epoch N+1 are calculated on the reduced amount. There is no lock-up — you can always transact freely. Only the balance at snapshot time counts for rewards.</p>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Practical note:</strong> The 15–20 day wait for first rewards is not a sign of anything wrong.
+      It is built into Cardano's epoch architecture. After the first reward cycle activates,
+      rewards arrive every 5 days without interruption.
+    </div>
+  </section>
+
+  <section class="card" id="pool-selection">
+    <h2>Pool Selection: What Actually Matters</h2>
+    <p>
+      Pool selection is the single most consequential decision for a Cardano delegator.
+      Unlike most PoS networks where validators can slash your stake, Cardano pools cannot
+      harm your principal — but they can significantly reduce your rewards through poor performance
+      or fee structures. Use
+      <a href="https://adapools.org/" target="_blank" rel="noopener nofollow" class="src">ADApools.org</a>
+      and
+      <a href="https://pool.pm/" target="_blank" rel="noopener nofollow" class="src">pool.pm</a>
+      as your primary research tools.
+    </p>
+
+    <table aria-label="Pool selection criteria">
+      <thead>
+        <tr><th>Criterion</th><th>What to look for</th><th>Red flag</th></tr>
+      </thead>
+      <tbody>
+        <tr class="highlight">
+          <td>Pool margin</td>
+          <td>0–3% for competitive pools</td>
+          <td>Above 5% without clear justification (e.g. mission-driven pool)</td>
+        </tr>
+        <tr>
+          <td>Fixed cost</td>
+          <td>Protocol minimum is 170 ADA/epoch; some pools charge more</td>
+          <td>Fixed cost above 340 ADA/epoch significantly impacts small delegations</td>
+        </tr>
+        <tr class="highlight">
+          <td>Pledge amount</td>
+          <td>Higher pledge = stronger operator commitment; signals "skin in the game"</td>
+          <td>Very low pledge (under 1,000 ADA) from a large pool may indicate low operator commitment</td>
+        </tr>
+        <tr>
+          <td>Saturation level</td>
+          <td>Under 80% of the saturation point (currently ~67M ADA per pool)</td>
+          <td>Above 100% saturation — rewards are reduced for all delegators by design</td>
+        </tr>
+        <tr class="highlight">
+          <td>Lifetime performance (RoS)</td>
+          <td>Above 95% of expected blocks produced over its lifetime</td>
+          <td>Below 90% lifetime performance — the pool is consistently missing blocks</td>
+        </tr>
+        <tr>
+          <td>Operator transparency</td>
+          <td>Identifiable operator, published contact, community presence</td>
+          <td>Anonymous with no contact information and no community presence</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- k-parameter / saturation visual -->
+    <h3 style="margin-top:1rem;">Understanding pool saturation (k-parameter)</h3>
+    <p style="font-size:.9rem;margin-bottom:.75rem;">The k-parameter determines how many "optimal" pools Cardano wants in its ecosystem. Currently k=500, meaning each pool's optimal size is approximately 1/500 of total delegated ADA (~67M ADA). Delegating to an already-saturated pool reduces your yield below the network average.</p>
+
+    <div style="margin:.5rem 0 1rem;">
+      <div class="k-bar"><span class="k-label">Under 50%</span><div class="k-track"><div class="k-fill" style="width:50%"></div></div><span class="k-val ok">Full rewards</span></div>
+      <div class="k-bar"><span class="k-label">50–80%</span><div class="k-track"><div class="k-fill" style="width:80%"></div></div><span class="k-val ok">Full rewards</span></div>
+      <div class="k-bar"><span class="k-label">80–100%</span><div class="k-track"><div class="k-fill" style="width:100%"></div></div><span class="k-val warn">Approaching limit</span></div>
+      <div class="k-bar"><span class="k-label">Over 100%</span><div class="k-track"><div class="k-fill" style="width:100%;background:linear-gradient(90deg,#B91C1C,#F87171)"></div></div><span class="k-val err">Reduced rewards</span></div>
+    </div>
+
+    <div class="badge-row">
+      <span class="badge">Pool Margin</span>
+      <span class="badge">Fixed Cost</span>
+      <span class="badge">Pledge Amount</span>
+      <span class="badge">Saturation &lt;80%</span>
+      <span class="badge">Lifetime RoS &gt;95%</span>
+    </div>
+
+    <div class="note">
+      <strong>Heuristic:</strong> A pool with 0–2% margin, at least 10,000 ADA pledge,
+      under 70% saturation, and above 98% lifetime performance is a strong delegation choice.
+      Mission-driven pools (charity, open-source, environmental) sometimes charge slightly higher
+      margins — evaluate the cause alongside the fee impact.
+    </div>
+  </section>
+
+  <section class="card" id="minimum">
+    <h2>Minimum Amount and Initial Costs</h2>
+    <p>
+      Cardano has the most accessible minimum staking threshold of any major proof-of-stake network.
+      There is no hard protocol minimum for delegation — any amount of ADA can be delegated.
+    </p>
+    <ul>
+      <li><strong>Delegation registration deposit:</strong> 2 ADA, fully refundable when you undelegate. This is a protocol requirement to register your staking key on-chain.</li>
+      <li><strong>Delegation transaction fee:</strong> approximately 0.17 ADA (paid once at initial delegation, and again if you redelegate to a new pool).</li>
+      <li><strong>Practical minimum:</strong> given the 2 ADA deposit and transaction fees, keeping at least 5 ADA in your wallet beyond the delegated amount is recommended as a buffer.</li>
+      <li><strong>Pool fixed cost impact:</strong> each pool charges a minimum fee (currently 170 ADA/epoch) that is shared among all delegators proportionally. For very small delegations (under 100 ADA), the fixed cost share can meaningfully reduce your per-epoch yield.</li>
+    </ul>
+
+    <p>
+      For a full explanation of staking cost structure, see the official
+      <a href="https://docs.cardano.org/about-cardano/stake-pool-operations/understand-rewards/" target="_blank" rel="noopener nofollow" class="src">Cardano reward mechanics documentation</a>.
+    </p>
+
+    <div class="note">
+      <strong>Cardano's advantage:</strong> Unlike Ethereum (32 ETH solo minimum), Polkadot
+      (dynamic minimum that can be hundreds of DOT), or even Cosmos (any ATOM but gas matters),
+      Cardano has no practical minimum that makes small delegations uneconomical.
+      A 50 ADA position earns proportionally the same yield as a 50,000 ADA position
+      from the same pool, minus a proportionally negligible fixed cost share.
+    </div>
+  </section>
+
+  <section class="card" id="liquid">
+    <h2>Liquid Staking Options for ADA</h2>
+    <p>
+      While Cardano's native staking is already highly liquid (no lock-up), liquid staking
+      protocols have emerged that allow ADA to be used in DeFi while continuing to earn
+      staking rewards. The Cardano DeFi ecosystem is tracked at
+      <a href="https://defillama.com/chain/Cardano" target="_blank" rel="noopener nofollow" class="src">DeFiLlama — Cardano</a>.
+    </p>
+
+    <div class="grid-2">
+      <div class="mini">
+        <h3>Native Cardano staking (already liquid)</h3>
+        <p class="muted">Because ADA never leaves your wallet and has no unbonding period, Cardano's native staking is already more liquid than most networks. You can send, spend, or bridge your ADA at any time — delegation is just a property of your wallet address, not a lock on your funds. For most users, native delegation is the optimal approach.</p>
+        <div class="kpi-badges"><span>No lock-up</span><span>ADA in wallet</span><span>Simplest option</span></div>
+      </div>
+      <div class="mini">
+        <h3>DeFi liquid staking (iUSD, cNETA, Fluid)</h3>
+        <p class="muted">Protocols like Fluid Tokens and others on Cardano's DeFi ecosystem allow staked ADA to serve as collateral or be represented as a liquid token in DeFi protocols. Still a relatively early-stage ecosystem compared to Ethereum — always verify audit status before using any Cardano DeFi protocol.</p>
+        <div class="kpi-badges"><span>DeFi composability</span><span>Early-stage</span><span>Audit required</span></div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Practical note:</strong> For most ADA holders, native delegation is the better choice
+      over Cardano DeFi liquid staking. Cardano's native staking is already "liquid" by design —
+      DeFi liquid staking adds smart contract risk without meaningfully improving liquidity
+      for most use cases. Only pursue Cardano DeFi liquid staking if you specifically need
+      ADA to serve as DeFi collateral simultaneously.
+    </div>
+  </section>
+
+  <section class="card" id="review">
+    <h2>Legitimacy, Trust Signals, and What to Watch (2025–2026)</h2>
+    <p>
+      Evaluating Cardano staking legitimacy focuses on pool quality and wallet security —
+      not protocol audit status, since native delegation uses Cardano's own consensus protocol.
+      Independent Cardano network analytics are published at
+      <a href="https://adastat.net/" target="_blank" rel="noopener nofollow" class="src">ADAstat.net</a>
+      and
+      <a href="https://cardanoscan.io/" target="_blank" rel="noopener nofollow" class="src">Cardanoscan.io</a>.
+    </p>
+
+    <div class="callout-grid">
+      <div class="mini">
+        <h3>Pool legitimacy signals</h3>
+        <p class="muted">
+          Verifiable operator identity (name, website, social media), consistent block production
+          history visible on ADApools.org, stable fee structure with no unexpected changes,
+          reasonable pledge demonstrating operator commitment, and active community presence
+          or open-source tooling contribution.
+        </p>
+      </div>
+      <div class="mini">
+        <h3>Common threats to watch</h3>
+        <p class="muted">
+          Phishing sites impersonating Daedalus, Eternl, or Lace wallets — always download wallet
+          software from official sources only. "Support agents" in Telegram or Discord who ask you
+          to share your seed phrase to "fix delegation issues."
+          Pools advertising impossibly high APY (above 8–10%) — these are either incorrect
+          calculations or misleading marketing.
+        </p>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>2025/2026 threat:</strong> Fake wallet download sites ranked highly in search results —
+      particularly for Daedalus and Eternl. Always navigate to wallet software via the official
+      Cardano Foundation links or directly from the official wallet developer's GitHub.
+      Seed phrases entered into a fake wallet result in immediate loss of all funds.
+    </div>
+  </section>
+
+  <section class="card" id="safety">
+    <h2>Risks and Rewards: What Actually Matters on Cardano</h2>
+    <p>
+      Cardano's staking model eliminates several risk categories that affect other networks.
+      Understanding what risks remain helps you focus effort correctly.
+    </p>
+
+    <table aria-label="ADA staking risk factors">
+      <thead>
+        <tr><th>Risk</th><th>Impact</th><th>Mitigation</th></tr>
+      </thead>
+      <tbody>
+        <tr class="highlight">
+          <td>Seed phrase compromise</td>
+          <td class="err">Complete loss of all wallet funds — most severe risk</td>
+          <td>Hardware wallet for large positions; never enter seed phrase anywhere online</td>
+        </tr>
+        <tr>
+          <td>Phishing / fake wallet software</td>
+          <td class="err">Seed phrase stolen — complete loss</td>
+          <td>Download wallet software only from official developer sources; verify checksums</td>
+        </tr>
+        <tr class="highlight">
+          <td>Poor pool performance</td>
+          <td class="warn">Reduced epoch rewards — yield below network average</td>
+          <td>Monitor pool performance monthly; redelegate if lifetime RoS falls below 95%</td>
+        </tr>
+        <tr>
+          <td>Pool fee increase</td>
+          <td class="warn">Reduced net APY without warning</td>
+          <td>Monitor fee changes; redelegate promptly if fees increase significantly</td>
+        </tr>
+        <tr class="highlight">
+          <td>Pool saturation</td>
+          <td class="warn">Reduced rewards if pool exceeds saturation</td>
+          <td>Monitor saturation level; redelegate to a less-saturated pool if needed</td>
+        </tr>
+        <tr>
+          <td>ADA price depreciation</td>
+          <td class="err">Real USD yield turns negative</td>
+          <td>Evaluate in USD terms; 4% APY in ADA does not protect against ADA price decline</td>
+        </tr>
+        <tr class="highlight">
+          <td>Cardano DeFi smart contracts</td>
+          <td class="err">Applies only if using DeFi protocols, not native delegation</td>
+          <td>Use only audited Cardano DeFi protocols; prefer native delegation for most users</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <strong>Cardano's unique safety property:</strong> Unlike ETH, ATOM, DOT, and most PoS networks,
+      Cardano delegators cannot be slashed — there is no mechanism by which a pool operator's mistake
+      can reduce your principal. Your ADA is always in your wallet. The only way to lose ADA
+      through staking-related activity is via seed phrase compromise or a phishing attack.
+      Pool issues only affect rewards, never principal.
+    </div>
+  </section>
+
+  <section class="card" id="comparison">
+    <h2>Comparison: Native Delegation vs Liquid Staking on Cardano</h2>
+    <p>
+      Given Cardano's unique native staking design, the case for liquid staking is less compelling
+      than on most other networks. This comparison helps clarify when each option makes sense.
+    </p>
+
+    <table aria-label="Native vs liquid staking on Cardano">
+      <thead>
+        <tr><th>Dimension</th><th>Native delegation</th><th>Cardano DeFi liquid staking</th></tr>
+      </thead>
+      <tbody>
+        <tr class="highlight">
+          <td>Lock-up period</td>
+          <td class="ok">None — ADA accessible at any time</td>
+          <td class="ok">None — same advantage</td>
+        </tr>
+        <tr>
+          <td>ADA custody</td>
+          <td class="ok">Always in your wallet</td>
+          <td class="warn">Smart contract holds ADA or issues a derivative</td>
+        </tr>
+        <tr class="highlight">
+          <td>Auto-compounding</td>
+          <td class="ok">Every epoch — automatic, no gas</td>
+          <td>Depends on protocol design</td>
+        </tr>
+        <tr>
+          <td>Smart contract risk</td>
+          <td class="ok">None for native delegation</td>
+          <td class="err">Yes — Cardano DeFi is still early-stage with smaller audit pools</td>
+        </tr>
+        <tr class="highlight">
+          <td>DeFi composability</td>
+          <td class="warn">ADA not available as DeFi collateral while delegated</td>
+          <td class="ok">Liquid token can serve as DeFi collateral</td>
+        </tr>
+        <tr>
+          <td>Complexity</td>
+          <td class="ok">Low — built into any Cardano wallet</td>
+          <td class="warn">Higher — separate DeFi protocol interaction required</td>
+        </tr>
+        <tr class="highlight">
+          <td>Net APY (typical)</td>
+          <td>~3–5% (network-determined)</td>
+          <td>Varies — base staking yield minus protocol fee</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <strong>Decision rule:</strong> For the vast majority of ADA holders, native delegation
+      is the superior choice. Cardano's staking is already liquid (no lock-up), ADA stays
+      in your wallet, and there is no smart contract risk. Only use Cardano DeFi liquid staking
+      if you specifically need ADA to serve as collateral in a DeFi protocol simultaneously —
+      a use case that applies to a small minority of holders.
+    </div>
+  </section>
+
+  <section class="card" id="best-practices">
+    <h2>Best Practices: High-Impact Rules for ADA Delegators</h2>
+    <ul>
+      <li><strong>Download wallet software from official sources only:</strong>
+        Eternl from <a href="https://eternl.io/" target="_blank" rel="noopener nofollow" class="src">eternl.io</a>,
+        Lace from <a href="https://www.lace.io/" target="_blank" rel="noopener nofollow" class="src">lace.io</a>,
+        Daedalus from the Cardano Foundation's official links. Never download wallet software from search results.</li>
+      <li><strong>Use a hardware wallet for large ADA positions:</strong> Cardano staking is fully supported by Ledger — the seed phrase never needs to be exposed for normal staking operations.</li>
+      <li><strong>Never enter your seed phrase online:</strong> no legitimate wallet recovery, delegation support, or "ADA reward claim" process requires your seed phrase. Any request for it is a scam.</li>
+      <li><strong>Research pools before delegating:</strong> spend 10 minutes on ADApools.org reviewing margin, fixed fee, saturation, pledge, and lifetime RoS before committing. This is the single highest-impact action for yield optimization on Cardano.</li>
+      <li><strong>Monitor pool performance monthly:</strong> check epoch-by-epoch block production at PoolTool or ADApools.org. If a pool's performance drops below 90% for two consecutive epochs, consider redelegating.</li>
+      <li><strong>Watch for fee changes:</strong> pool operators can change margins at any time. Enable fee change alerts on ADApools.org or PoolTool for your chosen pool.</li>
+      <li><strong>Prefer single-pool operators over multi-pool operators (MPOs):</strong> large MPOs running many pools can accumulate disproportionate voting and block production influence. Single pools support Cardano's decentralisation goals.</li>
+      <li><strong>Keep at least 5 ADA outside your delegated stake</strong> for transaction fees and any future redelegation costs.</li>
+    </ul>
+
+    <div class="note">
+      <strong>Most common mistake:</strong> Delegating to the most visible or largest pool without checking
+      saturation level. Large pools operated by exchanges (Binance, Coinbase) often run near or above saturation,
+      significantly reducing rewards for their delegators. Use ADApools.org to verify saturation before delegating.
+    </div>
+  </section>
+
+  <section class="card" id="troubleshooting">
+    <h2>Troubleshooting: Common Issues, Root Causes, and Fixes</h2>
+
+    <h3>"My rewards have not arrived after delegating"</h3>
+    <ul>
+      <li>This is expected for first-time delegators. Cardano's epoch architecture means first rewards arrive approximately 15–20 days (3 epochs) after initial delegation. Check your wallet's staking section — it should show your delegation as active even before the first reward arrives.</li>
+      <li>Verify your delegation is confirmed on-chain using your wallet address at
+        <a href="https://cardanoscan.io/" target="_blank" rel="noopener nofollow" class="src">Cardanoscan.io</a>.
+        If no staking key is registered, the delegation transaction may not have been submitted correctly.</li>
+    </ul>
+
+    <h3>"My rewards seem lower than expected this epoch"</h3>
+    <ul>
+      <li>Check your pool's block production for the relevant epoch at ADApools.org or PoolTool. If the pool missed blocks (produced fewer than expected), epoch rewards for all delegators are reduced proportionally.</li>
+      <li>Small variance is normal — pool block production is probabilistic for small pools. Evaluate performance over a rolling 30-epoch window, not a single epoch.</li>
+      <li>Verify your pool has not increased its margin or fixed fee since you delegated — fee changes take effect from the next epoch boundary.</li>
+    </ul>
+
+    <h3>"My pool is showing as over-saturated"</h3>
+    <ul>
+      <li>Redelegate to a different pool at the next opportunity. Over-saturated pools pay reduced rewards to their delegators — this is by protocol design, not a pool operator failure.</li>
+      <li>Redelegation is instant (confirmed in the next transaction) and takes effect from the next epoch snapshot. No penalty, no unbonding period.</li>
+    </ul>
+
+    <h3>"I cannot find my staking rewards in my wallet"</h3>
+    <ul>
+      <li>In Eternl and Lace, rewards are shown in the staking section and are counted in your spendable balance. Some wallets display rewards separately from the main balance — check the staking / rewards tab specifically.</li>
+      <li>Verify on Cardanoscan.io by searching your wallet address and checking the "Staking" tab for reward history.</li>
+    </ul>
+
+    <div class="note">
+      <strong>Best debugging method:</strong> Use Cardanoscan.io or ADApools.org to verify your
+      delegation and reward history on-chain. Wallet UIs can occasionally display stale information —
+      the block explorer is always the authoritative source for Cardano staking state.
+    </div>
+  </section>
+
+  <section class="eeat" id="eeat" aria-labelledby="eeat-title">
+    <h2 id="eeat-title">Authoritative Notes &amp; External References</h2>
+    <p>
+      Primary sources used throughout this guide. All links point to official Cardano Foundation
+      resources, Cardano-specific pool analytics, official wallet documentation, or established
+      block explorers for the Cardano network.
+    </p>
+
+    <div class="grid-2">
+      <div>
+        <h3>Official Cardano &amp; Wallets</h3>
+        <ul>
+          <li><a href="https://cardano.org/" target="_blank" rel="noopener nofollow">Cardano.org — Official Cardano Foundation Site</a></li>
+          <li><a href="https://docs.cardano.org/about-cardano/stake-pool-operations/understand-rewards/" target="_blank" rel="noopener nofollow">Cardano Docs — Reward Mechanics &amp; Epoch Structure</a></li>
+          <li><a href="https://eternl.io/" target="_blank" rel="noopener nofollow">Eternl Wallet — Recommended Staking Interface</a></li>
+          <li><a href="https://www.lace.io/" target="_blank" rel="noopener nofollow">Lace Wallet — IOG Official Wallet</a></li>
+          <li><a href="https://cardanoscan.io/" target="_blank" rel="noopener nofollow">Cardanoscan.io — Cardano Blockchain Explorer</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Pool Analytics &amp; Community</h3>
+        <ul>
+          <li><a href="https://adapools.org/" target="_blank" rel="noopener nofollow">ADApools.org — Stake Pool Explorer &amp; Analytics</a></li>
+          <li><a href="https://pooltool.io/" target="_blank" rel="noopener nofollow">PoolTool.io — Cardano Pool Performance &amp; Statistics</a></li>
+          <li><a href="https://pool.pm/" target="_blank" rel="noopener nofollow">Pool.pm — Cardano Pool Visualizer</a></li>
+          <li><a href="https://adastat.net/" target="_blank" rel="noopener nofollow">ADAstat.net — Cardano Network Statistics</a></li>
+          <li><a href="https://defillama.com/chain/Cardano" target="_blank" rel="noopener nofollow">DeFiLlama — Cardano DeFi Ecosystem TVL</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:1rem;">
+      <strong>About:</strong> Prepared by Crypto Finance Experts as a practical SEO-oriented knowledge base covering
+      ADA staking on Cardano: delegation mechanics, epoch reward flow, k-parameter and saturation,
+      pool selection criteria, APY/APR comparison, liquid staking options, safety, and troubleshooting.
+    </div>
+  </section>
+
+  <section class="card faq-section" aria-labelledby="faq">
+    <h2 id="faq">ADA Staking: Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f1" id="b1">
+        <h3>How does ADA staking work on Cardano?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f1" class="faq-content" role="region" aria-labelledby="b1">
+        <p>ADA staking works through delegation — you assign your ADA's staking power to a stake pool from your own wallet, without transferring your ADA to the pool. The pool uses your delegated stake to increase its chances of being selected to produce blocks each epoch. You earn rewards proportional to your stake, minus the pool's fees. ADA never leaves your wallet, there is no lock-up, and rewards compound automatically every 5-day epoch.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f2" id="b2">
+        <h3>What APY can I earn by staking ADA?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f2" class="faq-content" role="region" aria-labelledby="b2">
+        <p>Cardano's current network-wide gross APY is approximately 3–5%, decreasing gradually over time as the reserve fund depletes. Net APY after pool fees depends on your chosen pool's margin and fixed cost — a well-chosen pool with 0–2% margin typically delivers net APY of 3.5–4.8%. Check current rates at ADApools.org for the most accurate figures. Rewards compound automatically every epoch at no gas cost.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f3" id="b3">
+        <h3>Is there a minimum amount required to stake ADA?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f3" class="faq-content" role="region" aria-labelledby="b3">
+        <p>There is no hard protocol minimum — any amount of ADA can be delegated. The practical costs are: a 2 ADA refundable staking key deposit, approximately 0.17 ADA in transaction fees, and a small share of the pool's fixed cost (170 ADA/epoch shared proportionally among all delegators). For positions above a few hundred ADA, these costs are negligible relative to rewards. Cardano is one of the most accessible networks for small stakers.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f4" id="b4">
+        <h3>Why haven't I received my first rewards yet?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f4" class="faq-content" role="region" aria-labelledby="b4">
+        <p>Cardano's epoch architecture means first rewards arrive approximately 15–20 days after initial delegation. This is by design — your delegation is snapshot at the end of the current epoch, you become eligible the following epoch, rewards are calculated at the end of that epoch, and they arrive during the epoch after that (approximately 3 × 5 days = 15 days minimum). After the first cycle activates, rewards arrive every 5 days without interruption.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f5" id="b5">
+        <h3>Can I lose my ADA by staking on a bad pool?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f5" class="faq-content" role="region" aria-labelledby="b5">
+        <p>No — Cardano has no slashing mechanism. Pool operators cannot reduce your principal regardless of their performance or behaviour. Your ADA always remains in your wallet. A bad pool can only reduce your rewards (by missing blocks or charging high fees) — it cannot affect your principal. This is a unique safety property of Cardano that distinguishes it from Ethereum, Cosmos, Polkadot, and most other PoS networks.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f6" id="b6">
+        <h3>What is pool saturation and why does it matter?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f6" class="faq-content" role="region" aria-labelledby="b6">
+        <p>Cardano's k-parameter defines an "optimal" pool size — currently approximately 67 million ADA per pool (with k=500). If a pool accumulates more stake than its saturation point, the protocol reduces rewards for all its delegators as a deliberate mechanism to encourage redistribution and decentralisation. Delegating to an over-saturated pool means you receive less than the network average. Always check a pool's current saturation level (ideally under 80%) before delegating.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f7" id="b7">
+        <h3>How do I choose a good stake pool?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f7" class="faq-content" role="region" aria-labelledby="b7">
+        <p>Use ADApools.org or PoolTool.io to evaluate pools on: margin (0–3% for competitive pools), fixed cost (at protocol minimum 170 ADA/epoch or close), pledge amount (higher is better — signals operator commitment), saturation level (under 80%), and lifetime Return on Stake (above 95% of expected). Prefer single-pool operators over large multi-pool operators for better decentralisation support. Avoid pools with 0% margin from unknown operators — sustainable operations require some revenue.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f8" id="b8">
+        <h3>Can I switch pools without any penalty or lock-up?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f8" class="faq-content" role="region" aria-labelledby="b8">
+        <p>Yes — completely freely. Cardano has no unbonding period or redelegation cooldown. You can redelegate to a new pool at any time; the change takes effect from the next epoch snapshot (within 5 days). Your rewards from the previous pool's epoch continue normally through the transition — there is no gap in reward eligibility. No additional deposit is required for redelegation beyond the initial 2 ADA staking key deposit which you already paid.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f9" id="b9">
+        <h3>Do I need liquid staking if I'm already staking ADA natively?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f9" class="faq-content" role="region" aria-labelledby="b9">
+        <p>For most holders, no. Cardano's native staking is already liquid by design — ADA never leaves your wallet, there is no lock-up, and rewards compound automatically. Liquid staking protocols on Cardano add smart contract risk for the specific benefit of using staked ADA as DeFi collateral. If you don't need your ADA to simultaneously serve as DeFi collateral, native delegation is the simpler, safer, and equivalent-yield choice.</p>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="container" role="contentinfo" style="padding:2rem 0;border-top:1px solid var(--line);margin-top:2rem">
+  <p class="muted">© 2026 ADA Staking Guide. Educational content with safety-first operational focus. Not financial or investment advice.</p>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      const body = document.getElementById(btn.getAttribute('aria-controls'));
+      btn.setAttribute('aria-expanded', String(!open));
+      btn.querySelector('.faq-plus').textContent = open ? '+' : '−';
+      body.style.maxHeight = open ? '0' : body.scrollHeight + 'px';
+      body.classList.toggle('open', !open);
+    });
+  });
+</script>
+
+</body>
+</html>
